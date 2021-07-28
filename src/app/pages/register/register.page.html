@@ -1,0 +1,66 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Register Page</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
+    <div class="input-group"> 
+      <ion-item>
+        <ion-input type="text" placeholder="Full Name" formControlName="fullname"></ion-input>
+      </ion-item>
+      <div *ngIf="(f.fullname.dirty || f.fullname.touched) && f.fullname.errors" class="errors">
+        <span *ngIf="f.fullname.errors?.required">Full name is required</span>       
+      </div>
+
+     <ion-item>
+        <ion-input type="number" placeholder="Mapeador ID" formControlName="map_id"></ion-input>
+      </ion-item>
+      <div *ngIf="(f.map_id.dirty || f.map_id.touched) && f.map_id.errors" class="errors">
+        <span *ngIf="f.map_id.errors?.required">Mapeador ID is required</span>
+        <span *ngIf="f.map_id.errors?.min">Mapeador ID needs to be a number</span>   
+        <span *ngIf="f.map_id.errors?.max">Mapeador ID needs to be a number</span>         
+      </div>
+
+
+      <ion-item>
+        <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+      </ion-item>
+      <div *ngIf="(f.email.dirty || f.email.touched) && f.email.errors" class="errors">
+        <span *ngIf="f.email.errors?.required">Email is required</span>
+        <span *ngIf="f.email.errors?.email">Email is invalid</span>         
+      </div>
+
+      
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <div *ngIf="(f.password.dirty || f.password.touched) && f.password.errors" class="errors">
+        <span *ngIf="f.password.errors?.required">Password is required</span>
+        <span *ngIf="f.password.errors?.minlength">Password needs to be 6 characters</span>         
+      </div>
+
+      <ion-item>
+        <ion-input type="password" placeholder="Confirm Password" formControlName="confirmPassword"></ion-input>
+      </ion-item>
+      <div *ngIf="(f.confirmPassword.dirty || f.confirmPassword.touched) && f.confirmPassword.errors" class="errors">
+        <span *ngIf="f.confirmPassword.errors?.required">Confirm password is required</span>
+        <span *ngIf="f.confirmPassword.errors?.matching">Confirm password does not match</span>         
+      </div>
+
+      <ion-item>        
+        <!-- <ion-input type="checkbox" formControlName="acceptTerms"></ion-input> -->
+        <ion-checkbox color="dark" formControlName="acceptTerms"></ion-checkbox>
+        <ion-label for="acceptTerms"> I agree </ion-label>
+      </ion-item>
+      <div *ngIf="(f.acceptTerms.dirty || f.acceptTerms.touched) && f.acceptTerms.errors" class="errors">
+        <span *ngIf="f.acceptTerms.errors?.required">Must accept terms and conditions</span>
+      </div>
+
+    </div>
+    
+    <ion-button type="submit" expand="block" color="primary" [disabled]="!credentials.valid">Register</ion-button>
+    <ion-button type="button" expand="block" color="danger" (click)="onReset()">Reset</ion-button>
+  </form>
+</ion-content>

@@ -1,14 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Devices
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-button expand="full" (click)="logout()">Logout</ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div *ngFor="let item of deviceArray">        
+          <app-device [device]="item" (onChange)="handlerChange($event)"></app-device>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-button class="ion-content" expand="full" (click)="logout()">Logout</ion-button>
 </ion-content>
+
 <!-- <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>

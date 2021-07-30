@@ -8,13 +8,30 @@ import { HttpClient } from '@angular/common/http';
 export class ListDevicesService {
 
   public listadoDispositivos=[{
-    name:"Dispositivo 1",
+    name:"Luz 1",
     location: "Cocina",
-    description: "Sensor de puerta"
+    description: "Luz central",
+    icon: "beer-outline"
   },{
-    name:"Dispositivo 2",
+    name:"Video Juego",
+    location: "Habitacion",
+    description: "Play Station",
+    icon: "game-controller-outline"
+  },{
+    name:"Alarma",
+    location: "Habitacion",
+    description: "Alarma balcon frente",
+    icon: "barbell-outline"
+  },{
+    name:"Alarma",
     location: "Living",
-    description: "Sensor de humo"
+    description: "Alarma living principal",
+    icon: "earth-outline"
+  },{
+    name:"Pileta",
+    location: "Patio",
+    description: "Pileta",
+    icon: "headset-outline"
   }]
 
   constructor(private http: HttpClient) { }

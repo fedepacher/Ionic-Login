@@ -10,7 +10,6 @@ export class DeviceComponent implements OnInit {
   
   @Input() device:any;//variable de entreada que se la manda listado.component
   @Output() onChange=new EventEmitter(); //se utiliza para devolver algo al padre
-  
   constructor() { 
 
   }

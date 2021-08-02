@@ -6,7 +6,8 @@ import { Tab1Page } from './tab1.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
-import { DeviceModule } from '../components/device/device.module';
+import { DevicePageModule } from '../pages/device/device.module';
+
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import { DeviceModule } from '../components/device/device.module';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    DeviceModule
+    DevicePageModule
   ],
   declarations: [Tab1Page]
 })

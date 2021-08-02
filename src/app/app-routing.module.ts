@@ -27,6 +27,14 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'device',
+    loadChildren: () => import('./pages/device/device.module').then( m => m.DevicePageModule)
+  },
+  {
+    path: 'device/:id',
+    loadChildren: () => import('./pages/device/device.module').then( m => m.DevicePageModule)
   }
 ];
 @NgModule({

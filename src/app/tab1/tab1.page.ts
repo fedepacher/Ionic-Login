@@ -1,6 +1,6 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
-import { DeviceComponent } from '../components/device/device.component';
+//import { DeviceComponent } from '../components/device/device.component';
 import { AuthenticationService } from '../services/authentication.service';
 import { ListDevicesService } from '../services/list-devices.service';
 
@@ -13,13 +13,15 @@ export class Tab1Page {
 
   //@ViewChildren(DeviceComponent)device: QueryList<DeviceComponent>;
 
-  deviceArray;
+  //deviceArray;
   constructor(
     private authService: AuthenticationService, 
     private router: Router, 
     private listSvc: ListDevicesService) {
-      this.deviceArray = listSvc.listadoDispositivos;      
+      //this.deviceArray = listSvc.listadoDispositivos;    
     }
+
+  
 
   async logout(){
     try{

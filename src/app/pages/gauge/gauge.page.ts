@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { Device } from '../../model/device';
-import { ActivatedRoute } from '@angular/router';
-import { ListDevicesService } from '../../services/list-devices.service';
+import { ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -13,17 +11,15 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   templateUrl: './gauge.page.html',
   styleUrls: ['./gauge.page.scss'],
 })
-export class GaugePage implements OnInit {
+export class GaugePage implements OnInit, ViewWillEnter, ViewDidEnter{
 
   private valorObtenido:number=0;
   public myChart;
   private chartOptions;
-  public device : Device;
 
-  constructor(private router: ActivatedRoute, private devService: ListDevicesService) {    
+  constructor() {   
     setTimeout(()=>{
       console.log("Cambio el valor del sensor");
-      this.ionViewDidEnter();
       this.valorObtenido=60;
       //llamo al update del chart para refrescar y mostrar el nuevo valor
       this.myChart.update({series: [{
@@ -33,21 +29,23 @@ export class GaugePage implements OnInit {
               valueSuffix: ' kPA'
           }
       }]});
-    },6000);
+    },1000);
   }
 
-  update(){
-    
-  }
+  
 
   ngOnInit() {
-    let idDevice = this.router.snapshot.paramMap.get('id');
-    this.device = this.devService.getDevice(idDevice);
+    //let idDevice = this.router.snapshot.paramMap.get('id');
+    //this.device = this.devService.getDevice(idDevice);
     //this.ionViewDidEnter();
   }
 
   ionViewDidEnter() {
     this.generarChart();
+  }
+
+  ionViewWillEnter(): void {
+    console.log('ionViewWillEnter');
   }
 
   generarChart() {
@@ -60,7 +58,7 @@ export class GaugePage implements OnInit {
           plotShadow: false
         }
         ,title: {
-          text: this.device.name
+          text: "hola"//this.device.name
         }
 
         ,credits:{enabled:false}

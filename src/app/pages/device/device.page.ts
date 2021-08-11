@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ListDevicesService } from 'src/app/services/list-devices.service';
 import { Device } from '../../model/device';
+import { GaugePage } from '../gauge/gauge.page';
 
 @Component({
   selector: 'app-device',
@@ -15,6 +16,8 @@ export class DevicePage implements OnInit {
   
   //public device:Device;
   public device : Device;
+  //public gauge : GaugePage;
+  
   constructor(private router: ActivatedRoute, private devService: ListDevicesService) { 
 
   }

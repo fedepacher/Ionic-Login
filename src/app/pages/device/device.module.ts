@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { DevicePageRoutingModule } from './device-routing.module';
 
 import { DevicePage } from './device.page';
+import { GaugePageModule } from '../gauge/gauge.module';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    DevicePageRoutingModule
+    DevicePageRoutingModule,
+    GaugePageModule
   ],
   declarations: [DevicePage],
   exports:[DevicePage]

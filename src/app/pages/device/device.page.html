@@ -21,14 +21,12 @@
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
           </ion-button>
       </ion-buttons>
-      <ion-title>Device - {{device.name}}</ion-title>
+      <ion-title>Device Details</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div>Acá deberia traer mas información del dispositivo y su medida del sensor</div>
-  <div>
-      {{device.location}}
-  </div>
-
+<ion-content>  
+  <!-- <ion-item routerLink="/gauge" routerDirection="root">  -->
+  <app-gauge></app-gauge>  
+  <!-- </ion-item> -->
 </ion-content>

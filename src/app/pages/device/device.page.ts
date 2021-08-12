@@ -16,7 +16,7 @@ export class DevicePage implements OnInit {
   
   //public device:Device;
   public device : Device;
-  //public gauge : GaugePage;
+  public gauge : GaugePage;
   
   constructor(private router: ActivatedRoute, private devService: ListDevicesService) { 
 
@@ -27,6 +27,7 @@ export class DevicePage implements OnInit {
     this.device = this.devService.getDevice(idDevice);
     console.log(this.device);
     console.log(idDevice);
+    this.gauge = new GaugePage();
   }
 
   ionViewWillEnter(){

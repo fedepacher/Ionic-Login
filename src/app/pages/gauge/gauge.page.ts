@@ -11,16 +11,17 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   templateUrl: './gauge.page.html',
   styleUrls: ['./gauge.page.scss'],
 })
-export class GaugePage implements OnInit, ViewWillEnter, ViewDidEnter {
+export class GaugePage implements OnInit, ViewWillEnter, ViewDidEnter{
+
 
   private valorObtenido:number=0;
   public myChart;
   private chartOptions;
 
 
-  constructor() {    
+  constructor() {   
     setTimeout(()=>{
-      console.log("Cambio el valor del sensor");      
+      console.log("Cambio el valor del sensor");
       this.valorObtenido=60;
       //llamo al update del chart para refrescar y mostrar el nuevo valor
       this.myChart.update({series: [{
@@ -34,16 +35,17 @@ export class GaugePage implements OnInit, ViewWillEnter, ViewDidEnter {
   }
 
 
-  ngOnInit() {
-    
-  }
   
-  ionViewWillEnter(): void {
-    console.log('ionViewWillEnter');
+
+  ngOnInit() {
   }
 
   ionViewDidEnter() {
     this.generarChart();
+  }
+
+  ionViewWillEnter(): void {
+    console.log('ionViewWillEnter');
   }
 
   generarChart() {
@@ -56,7 +58,7 @@ export class GaugePage implements OnInit, ViewWillEnter, ViewDidEnter {
           plotShadow: false
         }
         ,title: {
-          text: 'nombre'//this.device.name
+          text: "hola"//this.device.name
         }
 
         ,credits:{enabled:false}

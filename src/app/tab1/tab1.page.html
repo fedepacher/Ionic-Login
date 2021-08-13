@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="primary">
-      <ion-title>List Devices</ion-title>
+      <ion-title>Devices List</ion-title>
     </ion-toolbar>    
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let device of listSvc.listadoDispositivos" routerLink="/device/{{device.id}}" routerDirection="root">
+    <ion-item *ngFor="let device of listSvc.listadoDispositivos" routerLink="/device/{{device.id}}">
         <ion-avatar slot="start">
             <ion-icon size="large" [name]="device.icon"></ion-icon>
         </ion-avatar>

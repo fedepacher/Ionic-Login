@@ -21,7 +21,9 @@ export class DevicePage implements OnInit, ViewWillEnter {
   public myChart;
   private chartOptions;
   public device : Device;
-  
+  isOpen : boolean;
+
+
   constructor(private router: ActivatedRoute, private devService: ListDevicesService) { 
     setTimeout(()=>{
       console.log("Cambio el valor del sensor");
@@ -127,4 +129,15 @@ export class DevicePage implements OnInit, ViewWillEnter {
   //   this.device.name="Cambio de nombre";
   //   this.onChange.emit(this.device);
   // }
+
+  changeState(){
+    this.isOpen = !this.isOpen;
+    if(this.isOpen){
+      alert("Valvula " + this.device.name + " fue abierta");
+    }
+    else{
+      alert("Valvula " + this.device.name + " fue cerrada");
+    }
+  }
+
 }

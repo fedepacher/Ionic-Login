@@ -1,19 +1,3 @@
-<!-- <ion-item>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button routerLink="/device/{{device.id}}">
-          <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-avatar slot="start">
-      <ion-icon [name]="device.icon"></ion-icon>
-    </ion-avatar>
-    <ion-label>
-      <h2>Sensor {{device.id}} - {{device.name}}</h2>      
-      <p>{{device.location}}</p>
-    </ion-label>
-  </ion-toolbar>
-</ion-item> -->
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
@@ -25,21 +9,51 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>  
+<ion-content style="text-align:center">  
   <!-- <ion-item routerLink="/gauge" routerDirection="root">  -->
   <!-- <app-gauge></app-gauge>   -->
   <!-- </ion-item> -->
-  <div id="highcharts" style="width:100%; height:400px;"></div>
-  <ion-button type="button" expand="block" color="primary">
-    OPEN VALVE
-  </ion-button>
-  <!-- <ion-button type="button" expand="block" color="primary">
-    CLOSE VALVE
-  </ion-button> -->
-  <ion-button type="button" expand="block" color="primary" fill="outline">
-    MESSURE INFO
-  </ion-button>
-  <ion-button type="button" expand="block" color="primary" fill="outline">
-    SPRAY LOGS
-  </ion-button>
+  <div id="highcharts" style="width:100%; height:300px;"></div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div *ngIf="!isOpen; else close">
+          <ion-button type="button" color="primary" (click)="changeState()">
+            OPEN VALVE
+          </ion-button>
+        </div> 
+        <ng-template #close>
+          <div>
+            <ion-button type="button" color="primary" (click)="changeState()">
+              CLOSE VALVE
+            </ion-button>
+          </div> 
+        </ng-template>
+        
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-button type="button" color="primary" fill="outline">
+            MESSURE INFO
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div>
+          <ion-button type="button"  color="primary" fill="outline">
+            SPRAY LOGS
+          </ion-button>
+        </div>  
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 </ion-content>

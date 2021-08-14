@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ListDevicesService } from 'src/app/services/list-devices.service';
+import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from '../../model/device';
 import { ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 import * as Highcharts from 'highcharts';
@@ -20,10 +20,11 @@ export class DevicePage implements OnInit, ViewWillEnter {
   private valorObtenido:number=0;
   public myChart;
   private chartOptions;
-  public device : Device;
+  private device : Device;
   isOpen : boolean;
 
-  constructor(private router: ActivatedRoute, private devService: ListDevicesService) { 
+
+  constructor(private router: ActivatedRoute, private devService: DevicesService) { 
     setTimeout(()=>{
       console.log("Cambio el valor del sensor");
       this.valorObtenido=60;
@@ -38,11 +39,18 @@ export class DevicePage implements OnInit, ViewWillEnter {
     },1000);
   }
 
+  
+
   ngOnInit() {
     let idDevice = this.router.snapshot.paramMap.get('id');
-    this.device = this.devService.getDevice(idDevice);
-    console.log(this.device);
+    this.getDevice(idDevice);
     console.log(idDevice);    
+  }
+
+
+  async getDevice(id){
+    this.device = await this.devService.getDevice(id);
+    console.log(this.device);
   }
 
   ionViewDidEnter() {
@@ -63,7 +71,7 @@ export class DevicePage implements OnInit, ViewWillEnter {
           plotShadow: false
         }
         ,title: {
-          text: this.device.name
+          text: this.device.nombre
         }
 
         ,credits:{enabled:false}
@@ -132,10 +140,10 @@ export class DevicePage implements OnInit, ViewWillEnter {
   changeState(){
     this.isOpen = !this.isOpen;
     if(this.isOpen){
-      alert("Valvula " + this.device.name + " fue abierta");
+      alert("Valvula " + this.device.nombre + " fue abierta");
     }
     else{
-      alert("Valvula " + this.device.name + " fue cerrada");
+      alert("Valvula " + this.device.nombre + " fue cerrada");
     }
   }
 

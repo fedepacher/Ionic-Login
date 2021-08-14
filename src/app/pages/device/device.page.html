@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
       <ion-buttons slot="start">
           <ion-button routerLink="/tabs">
               <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
@@ -19,13 +19,13 @@
     <ion-row>
       <ion-col>
         <div *ngIf="!isOpen; else close">
-          <ion-button type="button" color="primary" (click)="changeState()">
+          <ion-button type="button" color="primary" (click)="changeState()" style="width:300px;">
             OPEN VALVE
           </ion-button>
         </div> 
         <ng-template #close>
           <div>
-            <ion-button type="button" color="primary" (click)="changeState()">
+            <ion-button type="button" color="primary" (click)="changeState()" style="width:300px;">
               CLOSE VALVE
             </ion-button>
           </div> 
@@ -38,7 +38,7 @@
     <ion-row>
       <ion-col>
         <div>
-          <ion-button type="button" color="primary" fill="outline">
+          <ion-button type="button" color="primary" fill="outline" style="width:300px;">
             MESSURE INFO
           </ion-button>
         </div>
@@ -48,7 +48,7 @@
     <ion-row>
       <ion-col>
         <div>
-          <ion-button type="button"  color="primary" fill="outline">
+          <ion-button type="button"  color="primary" fill="outline" style="width:300px;">
             SPRAY LOGS
           </ion-button>
         </div>  

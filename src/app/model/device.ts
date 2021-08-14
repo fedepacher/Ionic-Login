@@ -1,49 +1,41 @@
 export class Device{
+    private _dispositivoId: number;
+    private _nombre: string; 
+    private _ubicacion: string;
+    private _electrovalvulaId: number;
 
-    private _id:number = 0;
-    private _name:string = "";
-    private _location:string="";
-    private _valveId:number = 0;
-    private _icon:string = "";
-
-    constructor(id:number, name:string, location:string, valveId:number, icon:string){
-        this._id = id;
-        this._name = name;
-        this._location = location;
-        this._valveId = valveId;
-        this._icon = icon;
+    constructor(dispositivo,nombre,ubicacion,electrovalvulaId){
+        this._dispositivoId=dispositivo;
+        this._nombre=nombre;
+        this._ubicacion=ubicacion;
+        this._electrovalvulaId=electrovalvulaId;
     }
 
-    public get id() : number{
-        return this._id;
+    public get dispositivoId(): number {
+        return this._dispositivoId;
     }
-    public get name() : string{
-        return this._name;
-    }
-    public get location() : string{
-        return this._location;
-    }
-    public get valveId() : number{
-        return this._valveId;
+    public set dispositivoId(value: number) {
+        this._dispositivoId = value;
     }
 
-    public get icon() : string{
-        return this._icon;
+    public get nombre(): string {
+        return this._nombre;
+    }
+    public set nombre(value: string) {
+        this._nombre = value;
     }
 
-    public set id(value:number){
-        this._id = value;
+    public get ubicacion(): string {
+        return this._ubicacion;
     }
-    public set name(value:string){
-        this._name = value;
+    public set ubicacion(value: string) {
+        this._ubicacion = value;
     }
-    public set location(value:string){
-        this._location = value;
+    
+    public get electrovalvulaId(): number {
+        return this._electrovalvulaId;
     }
-    public set valveId(value:number){
-        this._valveId = value;
-    }
-    public set icon(value:string){
-        this._icon = value;
+    public set electrovalvulaId(value: number) {
+        this._electrovalvulaId = value;
     }
 }

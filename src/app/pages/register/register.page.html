@@ -1,12 +1,6 @@
-<!-- <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Register Page</ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
-<ion-content>
+<ion-content style="text-align:center">
   <form (ngSubmit)="onSubmit()" [formGroup]="credentials">
-    <div class="input-group"> 
+    <div class="input-group" style="width:300px; margin:0 auto;"> 
       <ion-item>
         <ion-input type="text" placeholder="Full Name" formControlName="fullname"></ion-input>
       </ion-item>
@@ -59,8 +53,12 @@
       </div>
 
     </div>
+    <div>
+      <ion-button type="submit" color="primary" [disabled]="!credentials.valid" style="width:300px;">Register</ion-button>
+    </div>
+    <div>
+      <ion-button type="button" color="danger" (click)="onReset()" style="width:300px;">Reset</ion-button>
+    </div>
     
-    <ion-button type="submit" expand="block" color="primary" [disabled]="!credentials.valid">Register</ion-button>
-    <ion-button type="button" expand="block" color="danger" (click)="onReset()">Reset</ion-button>
   </form>
 </ion-content>

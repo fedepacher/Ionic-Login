@@ -1,10 +1,6 @@
-
 <ion-content style="text-align:center">
   <form (ngSubmit)="login()" [formGroup]="credentials">
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <div class="input-group"> 
+          <div class="input-group" style="width:300px; margin:0 auto;"> 
             <ion-item>
               <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
             </ion-item>
@@ -20,45 +16,28 @@
               <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>         
             </div>
           </div>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
+       
           <div>
-            <ion-button type="submit" [disabled]="!credentials.valid">Log in</ion-button>
+            <ion-button type="submit" [disabled]="!credentials.valid" style="width:300px;">Log in</ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
+       
           <div>
-            <ion-button type="button" color="light" fill="clear" (click)="register()">Not yet a member? Sign up!</ion-button>
+            <ion-button type="button" color="light" fill="clear" (click)="register()" style="width:300px;">Not yet a member? Sign up!</ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
+      
           <div>
-            <ion-button type="button" color="tertiary">
+            <ion-button type="button" color="tertiary" style="width:300px;">
               <ion-icon name="logo-google" slot="start"></ion-icon>
               Sign in with Google
             </ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
+       
           <div>
-            <ion-button type="button" color="tertiary">
+            <ion-button type="button" color="tertiary" style="width:300px;">
               <ion-icon name="logo-apple" slot="start"></ion-icon>
               Sign in with Apple
             </ion-button>
           </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+       
   </form>
 </ion-content>

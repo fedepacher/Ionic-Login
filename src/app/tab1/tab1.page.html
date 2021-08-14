@@ -4,29 +4,20 @@
     </ion-toolbar>    
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let device of listSvc.listadoDispositivos" routerLink="/device/{{device.id}}">
+<ion-content style="text-align:center">
+  <ion-list style="width:300px; margin:0 auto;">
+    <ion-item *ngFor="let device of devicesList" routerLink="/device/{{device.dispositivoId}}">
         <ion-avatar slot="start">
-            <ion-icon size="large" [name]="device.icon"></ion-icon>
+            <ion-icon size="large" name="thermometer"></ion-icon>
         </ion-avatar>
         <ion-label>
-            <h2>Sensor {{device.id}} - {{device.name}}</h2>
+            <h2>Sensor {{device.dispositivoId}} - {{device.nombre}}</h2>
             <h3>
-                <ion-icon name="pin"></ion-icon> {{device.location}}</h3>
+                <ion-icon name="pin"></ion-icon> {{device.ubicacion}}</h3>
         </ion-label>
     </ion-item>
-  </ion-list>
-  <!-- <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div *ngFor="let item of deviceArray">        
-          <app-device [device]="item" (onChange)="handlerChange($event)"></app-device>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
-  <ion-button class="ion-content" expand="full" (click)="logout()">Logout</ion-button>
+  </ion-list>  
+  <ion-button class="ion-content" (click)="logout()" style="width:300px;">Logout</ion-button>
 </ion-content>
 
 

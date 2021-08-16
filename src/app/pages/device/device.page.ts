@@ -2,13 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from '../../model/device';
-import { IonDatetime, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
+import { IonDatetime, ModalController, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 import * as Highcharts from 'highcharts';
 import { Messure } from 'src/app/model/messure';
 import { MessureService } from '../../services/messure.service';
 import { CustomDatePipe } from 'src/app/pipe/datetime.pipe';
 import { SprayService } from '../../services/spray.service';
 import { Spray } from 'src/app/model/spray';
+import { ModalInfoPage } from '../modal-info/modal-info.page';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -36,7 +37,8 @@ export class DevicePage implements OnInit, ViewWillEnter {
     private devService: DevicesService, 
     private messureService: MessureService,
     private myCustomDatePipe: CustomDatePipe,
-    private sprayService: SprayService) { 
+    private sprayService: SprayService,
+    private modalCtrl: ModalController) { 
     setTimeout(()=>{
       this.valorObtenido = Number(this.messure.valor);
       console.log("Valor del sensor: " + this.valorObtenido);      
@@ -197,4 +199,21 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.sprayService.postNewValue(new Spray(0, value, myDate, this.device[0].electrovalvulaId));
   }
 
+  async messureInfo(){
+    const modal = await this.modalCtrl.create({
+      component: ModalInfoPage,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        nombre: 'Fefi',
+        pais: 'Argentina'
+      }
+    });
+    return await modal.present();
+  }
+
+  
+
+  sprayInfo(){
+
+  }
 }

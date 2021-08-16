@@ -8,15 +8,21 @@ import { DevicePageRoutingModule } from './device-routing.module';
 
 import { DevicePage } from './device.page';
 import { GaugePageModule } from '../gauge/gauge.module';
+import { ModalInfoPage } from '../modal-info/modal-info.page';
+import { ModalInfoPageModule } from '../modal-info/modal-info.module';
 
 
 @NgModule({
+  entryComponents:[
+    ModalInfoPage
+  ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     DevicePageRoutingModule,
-    GaugePageModule
+    GaugePageModule,
+    ModalInfoPageModule
   ],
   declarations: [DevicePage],
   exports:[DevicePage]

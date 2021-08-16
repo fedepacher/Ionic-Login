@@ -26,8 +26,8 @@ export class MessureService {
   getAllMessure(id):Promise<Messure[]>{
     return this._http.get(this.urlApi + "/api/messure/" + id + "/all")
     .toPromise()
-    .then((list:Messure[])=>{
-      return list;
+    .then((value:Messure[])=>{
+      return value;
     });
   }
 

@@ -7,6 +7,8 @@ import * as Highcharts from 'highcharts';
 import { Messure } from 'src/app/model/messure';
 import { MessureService } from '../../services/messure.service';
 import { CustomDatePipe } from 'src/app/pipe/datetime.pipe';
+import { SprayService } from '../../services/spray.service';
+import { Spray } from 'src/app/model/spray';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -26,13 +28,15 @@ export class DevicePage implements OnInit, ViewWillEnter {
   private chartOptions;
   private device : Device;
   private messure : Messure;
+  private spray : Spray[];
   isOpen : boolean;
 
 
   constructor(private router: ActivatedRoute, 
     private devService: DevicesService, 
-    private messureService:MessureService,
-    private myCustomDatePipe: CustomDatePipe) { 
+    private messureService: MessureService,
+    private myCustomDatePipe: CustomDatePipe,
+    private sprayService: SprayService) { 
     setTimeout(()=>{
       this.valorObtenido = Number(this.messure.valor);
       console.log("Valor del sensor: " + this.valorObtenido);      
@@ -56,6 +60,7 @@ export class DevicePage implements OnInit, ViewWillEnter {
     console.log('ID Dispositivo: ' + idDevice); 
     this.getDeviceById(idDevice);
     this.getMessureById(idDevice);
+    
     //console.log('Nombre Dispositivo: ' + this.device.nombre); 
   }
 
@@ -64,13 +69,19 @@ export class DevicePage implements OnInit, ViewWillEnter {
     console.log('Se ejecuta getDeviceById'); 
     this.device = await this.devService.getDevice(id);
     console.log(this.device);
-
+    this.getSprayById(this.device[0].electrovalvulaId);
   }
 
   async getMessureById(id){
     console.log('Se ejecuta getMessureById'); 
     this.messure = await this.messureService.getLastMessure(id);
     console.log(this.messure);    
+  }
+
+  async getSprayById(id){
+    console.log('Se ejecuta getSprayById')
+    this.spray = await this.sprayService.getAllSpray(id);
+    console.log(this.spray);
   }
 
   ionViewDidEnter() {
@@ -167,15 +178,23 @@ export class DevicePage implements OnInit, ViewWillEnter {
     }
     else{
       alert("Valvula " + this.device[0].nombre + " fue cerrada");
-      this.insertElement();
+      this.insertNewMessure();
     }
+    this.insertSprayLog();
   }
 
-  insertElement(){
+  insertNewMessure(){
     console.log("insertElement")
     let myDate = this.myCustomDatePipe.transform(new Date());
-    let value = Math.random() * 100;
+    let value = Math.trunc((Math.random() * 100));
+    console.log(value);
     this.messureService.postNewValue(new Messure(0, myDate, value, this.device[0].dispositivoId));
+  }
+
+  insertSprayLog(){
+    let value = this.isOpen?'1':'0';
+    let myDate = this.myCustomDatePipe.transform(new Date());    
+    this.sprayService.postNewValue(new Spray(0, value, myDate, this.device[0].electrovalvulaId));
   }
 
 }

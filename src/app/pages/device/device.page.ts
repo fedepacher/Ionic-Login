@@ -174,7 +174,8 @@ export class DevicePage implements OnInit, ViewWillEnter {
   insertElement(){
     console.log("insertElement")
     let myDate = this.myCustomDatePipe.transform(new Date());
-    this.messureService.postNewValue(new Messure(0, myDate, this.messure.valor, this.device[0].dispositivoId));
+    let value = Math.random() * 100;
+    this.messureService.postNewValue(new Messure(0, myDate, value, this.device[0].dispositivoId));
   }
 
 }

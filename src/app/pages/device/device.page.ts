@@ -2,8 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DevicesService } from 'src/app/services/devices.service';
 import { Device } from '../../model/device';
-import { ViewDidEnter, ViewWillEnter } from '@ionic/angular';
+import { IonDatetime, ViewDidEnter, ViewWillEnter } from '@ionic/angular';
 import * as Highcharts from 'highcharts';
+import { Messure } from 'src/app/model/messure';
+import { MessureService } from '../../services/messure.service';
+import { CustomDatePipe } from 'src/app/pipe/datetime.pipe';
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 require('highcharts/modules/solid-gauge')(Highcharts);
@@ -12,6 +15,7 @@ require('highcharts/modules/solid-gauge')(Highcharts);
   selector: 'app-device',
   templateUrl: './device.page.html',
   styleUrls: ['./device.page.scss'],
+  providers:[CustomDatePipe]
 })
 export class DevicePage implements OnInit, ViewWillEnter {
 
@@ -21,13 +25,18 @@ export class DevicePage implements OnInit, ViewWillEnter {
   public myChart;
   private chartOptions;
   private device : Device;
+  private messure : Messure;
   isOpen : boolean;
 
 
-  constructor(private router: ActivatedRoute, private devService: DevicesService) { 
+  constructor(private router: ActivatedRoute, 
+    private devService: DevicesService, 
+    private messureService:MessureService,
+    private myCustomDatePipe: CustomDatePipe) { 
     setTimeout(()=>{
-      console.log("Cambio el valor del sensor");
-      this.valorObtenido=60;
+      this.valorObtenido = Number(this.messure.valor);
+      console.log("Valor del sensor: " + this.valorObtenido);      
+      //this.valorObtenido=60;
       //llamo al update del chart para refrescar y mostrar el nuevo valor
       this.myChart.update({series: [{
           name: 'kPA',
@@ -42,23 +51,37 @@ export class DevicePage implements OnInit, ViewWillEnter {
   
 
   ngOnInit() {
+    console.log('ngOnInit');
     let idDevice = this.router.snapshot.paramMap.get('id');
-    this.getDevice(idDevice);
-    console.log(idDevice);    
+    console.log('ID Dispositivo: ' + idDevice); 
+    this.getDeviceById(idDevice);
+    this.getMessureById(idDevice);
+    //console.log('Nombre Dispositivo: ' + this.device.nombre); 
   }
 
 
-  async getDevice(id){
+  async getDeviceById(id){
+    console.log('Se ejecuta getDeviceById'); 
     this.device = await this.devService.getDevice(id);
     console.log(this.device);
+
+  }
+
+  async getMessureById(id){
+    console.log('Se ejecuta getMessureById'); 
+    this.messure = await this.messureService.getLastMessure(id);
+    console.log(this.messure);    
   }
 
   ionViewDidEnter() {
+    console.log('ionViewDidEnter');
+    //this.valorObtenido = this.messure.valor;
     this.generarChart();
   }
 
   ionViewWillEnter(): void {
     console.log('ionViewWillEnter');
+    //this.valorObtenido = this.messure.valor;
   }
 
   generarChart() {
@@ -71,7 +94,7 @@ export class DevicePage implements OnInit, ViewWillEnter {
           plotShadow: false
         }
         ,title: {
-          text: this.device.nombre
+          text: this.device[0].nombre
         }
 
         ,credits:{enabled:false}
@@ -140,11 +163,18 @@ export class DevicePage implements OnInit, ViewWillEnter {
   changeState(){
     this.isOpen = !this.isOpen;
     if(this.isOpen){
-      alert("Valvula " + this.device.nombre + " fue abierta");
+      alert("Valvula " + this.device[0].nombre + " fue abierta");
     }
     else{
-      alert("Valvula " + this.device.nombre + " fue cerrada");
+      alert("Valvula " + this.device[0].nombre + " fue cerrada");
+      this.insertElement();
     }
+  }
+
+  insertElement(){
+    console.log("insertElement")
+    let myDate = this.myCustomDatePipe.transform(new Date());
+    this.messureService.postNewValue(new Messure(0, myDate, this.messure.valor, this.device[0].dispositivoId));
   }
 
 }

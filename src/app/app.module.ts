@@ -9,9 +9,10 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CustomDatePipe } from './pipe/datetime.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CustomDatePipe],
   entryComponents: [],
   imports: [
     BrowserModule, 

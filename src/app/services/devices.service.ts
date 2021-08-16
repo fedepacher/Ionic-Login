@@ -27,12 +27,14 @@ export class DevicesService {
   }
 
   getDevice(id):Promise<Device>{
-    console.log(this.urlApi + "/api/device/" + id);
+    console.log('Se ejecuta promesa getDevice');
     return this._http.get(this.urlApi + "/api/device/" + id)
     .toPromise()//devuelve una promesa
     .then((device:Device)=>{//cuando se tiene el valor en el then se castea y se convierte al tipo que se necesita devolver
+      console.log('Termina ejecucion exitosa promesa getDevice');
       return device;
     });
+    
   }
 
 }

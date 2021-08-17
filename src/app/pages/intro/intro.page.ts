@@ -19,10 +19,16 @@ export class IntroPage implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * Evento del boton nextm para pasar a la siguiente diapositiva
+   */
   next(){
     this.slides.slideNext();
   }
 
+  /**
+   * Evento del boton start que redirige la pagina al login de usuario
+   */
   async start() {
     //await Storage.set({key: INTRO_KEY, value: 'true'});
     try{

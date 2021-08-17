@@ -9,15 +9,15 @@ import { Spray } from '../../model/spray';
 })
 export class ModalInfoPage implements OnInit {
 
-  //@Input() logList;
-  // @Input() nombre;
-  // @Input() pais;
   array:Array<any>[];
   table:String="";
 
   constructor(private modalCtrl : ModalController,
     private navParams: NavParams) { }
 
+    /**
+     * Obtinene la tabla de elementos a mostrar en pantalla y que tipo de elemento es, spray o messure
+     */
   ngOnInit() {
     this.table = this.navParams.get('table');
     this.array = this.navParams.get('data');
@@ -25,6 +25,9 @@ export class ModalInfoPage implements OnInit {
     console.log(this.table);
   }
 
+  /**
+   * Elimina el modal de la pantalla
+   */
   outModal(){
     this.modalCtrl.dismiss();
   }

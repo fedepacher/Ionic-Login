@@ -19,18 +19,9 @@ export class Tab1Page {
       this.callDeviceService();
     }
 
-  
-    // callDeviceService(){
-    //   this.devService.getDevices().then((list:Device[])=>{
-    //     console.log(list);
-    //     this.devicesList = list; 
-  
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err);
-    //   })
-    // }
-
+    /**
+     * Metodo que obtiene la lista de dispositivos de la base de datos
+     */
     async callDeviceService(){
       console.log("Lamo al service de device")
       this.devicesList = await this.devService.getDevices();
@@ -40,6 +31,9 @@ export class Tab1Page {
       //let device = await this.devService.getDevice(list[0]);
     }
 
+  /**
+   * Evento del boton logout
+   */
   async logout(){
     try{
       await this.authService.logout();
@@ -48,9 +42,5 @@ export class Tab1Page {
     catch(error){
       console.log('Error->', error);
     }
-  }
-
-  handlerChange(e:any){
-    //console.log(e);
   }
 }

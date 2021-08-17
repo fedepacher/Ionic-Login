@@ -29,7 +29,9 @@ export class LoginPage implements OnInit {
     });
   }
 
-
+  /**
+   * Evento del boton login que cheque si el usuario existe y redirige la pagina al home
+   */
   async login(){
     try{
       const loading = await this.loadingController.create();
@@ -56,6 +58,9 @@ export class LoginPage implements OnInit {
     }
   }
 
+  /**
+   * Evento del boton register que redirige la pagina al form para registrarse
+   */
   async register() {
     try{
       this.router.navigateByUrl('/register', {replaceUrl:true});
@@ -65,11 +70,16 @@ export class LoginPage implements OnInit {
     }
   }
 
-
+  /**
+   * Devuelve el email ingresado
+   */
   get email(){
     return this.credentials.get('email');
   }
 
+  /**
+   * Devuelve el password ingresado
+   */
   get password() {
     return this.credentials.get('password');
   }

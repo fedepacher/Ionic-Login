@@ -36,7 +36,10 @@ export class RegisterPage implements OnInit {
     });    
   }
 
-
+  /**
+   * Evento del boton submit
+   * @returns 
+   */
   onSubmit(): void {
     this.submitted = true;
     if(this.credentials.invalid){
@@ -47,11 +50,18 @@ export class RegisterPage implements OnInit {
     this.register();
   }
 
+  /**
+   * Resetea los campos del formulario
+   */
   onReset(): void {
     this.submitted=false;
     this.credentials.reset();
   }
 
+
+  /**
+   * HAce el proceso de registrar un nuevo usuario
+   */
   async register(){
     try{
       const loading = await this.loadingController.create();

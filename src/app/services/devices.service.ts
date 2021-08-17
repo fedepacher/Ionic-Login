@@ -9,15 +9,13 @@ import { Device } from '../model/device';
 export class DevicesService {
 
   urlApi = "http://localhost:8000"
-  //public listadoDispositivos:Array<Device> = new Array<Device>();
- 
-  constructor(private _http: HttpClient) { 
-    // this.listadoDispositivos.push(new Device(1, "Luz 1", "Cocina", 10, "beer-outline"));
-    // this.listadoDispositivos.push(new Device(2, "Pileta", "Patio", 13, "headset-outline"));
-    // this.listadoDispositivos.push(new Device(3, "Alarma", "Living", 19, "earth-outline"));
-    // this.listadoDispositivos.push(new Device(4, "Alarma", "Habitacion", 15, "barbell-outline"));
-  }
+  
+  constructor(private _http: HttpClient) { }
 
+  /**
+   * Metodo que llama a la api para recuperar todos los dispositivos de la base de datos
+   * @returns Devuelve el listado de dispositivos almacenados
+   */
   getDevices():Promise<Device[]>{
     return this._http.get(this.urlApi + "/api/device")
     .toPromise()//devuelve una promesa
@@ -26,6 +24,11 @@ export class DevicesService {
     });
   }
 
+  /**
+   * Metodo que llama a la api para recuperar un dispositivo de la base de datos
+   * @param id Id del dispositivo a recuperar
+   * @returns Devuelve el listado de dispositivos almacenados
+   */
   getDevice(id):Promise<Device>{
     console.log('Se ejecuta promesa getDevice');
     return this._http.get(this.urlApi + "/api/device/" + id)

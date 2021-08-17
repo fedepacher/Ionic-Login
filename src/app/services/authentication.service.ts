@@ -18,6 +18,9 @@ export class AuthenticationService {
     this.loadToken();
   }
 
+  /**
+   * Recupera el token en caso de que haya sido guardado en las cookies y asi evitar loggearse nuevamente
+   */
   async loadToken(){
     try{
       const token = this.cookies.getDataFromCookies(TOKEN_KEY);
@@ -34,26 +37,39 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Ejecuta el proceso de login 
+   * @param credentials Email y password ingresado
+   * @returns 
+   */
   login(credentials: {email, password}): Observable<any>{
     try{
       this.isAuthenticated.next(true);
       return this.http.post(`https://reqres.in/api/login`, credentials);
-      //return this.http.post('http://localhost:3000/auth/login', credentials);
+      //return this.http.post('http://localhost:8000/auth/login', credentials);
     }
     catch(error){
       console.log('Error->', error);
     }
   }
 
+  /**
+   * Llama a la api para crear un nuevo usuario
+   * @param credentials Datos del usuario a registrarse
+   * @returns 
+   */
   register(credentials: {fullname, map_id, email, password, acceptTerms, role}): Observable<any>{
     try{
-      return this.http.post('http://localhost:3000/users', credentials);
+      return this.http.post('http://localhost:8000/users', credentials);
     }
     catch(error){
       console.log('Error->', error);
     }
   }
 
+  /**
+   * Proceso de logout que resetea las cookies para que la proxima vez me pida logueo
+   */
   logout() {
     this.isAuthenticated.next(false);
     this.cookies.deleteDataFromCookies(TOKEN_KEY);

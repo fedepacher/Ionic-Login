@@ -27,8 +27,8 @@ export class DevicePage implements OnInit, ViewWillEnter {
   private chartOptions;
   private device : Device;//dispositivo 
   private messure : Messure;//ultima medicion
-  private spray : Spray[];//arreglo de logs de riego
-  private allMessure : Messure[];//todas las mediciones de un sensor
+  private sprayArray : Spray[];//arreglo de logs de riego
+  private allMessureArray : Messure[];//todas las mediciones de un sensor
   isOpen : boolean;//indica si e la valvula esta abierta o cerrada
 
 
@@ -64,7 +64,10 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.getAllMessureById(idDevice);
   }
 
-
+  /**
+   * Obtiene el dispositivo llamando a la API a traves del id
+   * @param id Id del dispositivo encuentado
+   */
   async getDeviceById(id){
     console.log('Se ejecuta getDeviceById'); 
     this.device = await this.devService.getDevice(id);
@@ -73,35 +76,52 @@ export class DevicePage implements OnInit, ViewWillEnter {
     
   }
 
+  /**
+   * Obtiene la ultima medicion del dispositivo llamando a la API a traves del id
+   * @param id Id del dispositivo encuentado
+   */
   async getMessureById(id){
     console.log('Se ejecuta getMessureById'); 
     this.messure = await this.messureService.getLastMessure(id);
     console.log(this.messure);    
   }
 
+  /**
+   * Obtiene todos los logs de riego del dispositivo llamando a la API a traves del id
+   * @param id Id del dispositivo encuentado
+   */
   async getSprayById(id){
     console.log('Se ejecuta getSprayById')
-    this.spray = await this.sprayService.getAllSpray(id);
-    console.log(this.spray);
+    this.sprayArray = await this.sprayService.getAllSpray(id);
+    console.log(this.sprayArray);
   }
 
+  /**
+   * Obtiene todas los mediciones del dispositivo llamando a la API a traves del id
+   * @param id Id del dispositivo encuentado
+   */
   async getAllMessureById(id){
     console.log('Se ejecuta getAllMessureById');
-    this.allMessure = await this.messureService.getAllMessure(id);
-    console.log(this.allMessure);
+    this.allMessureArray = await this.messureService.getAllMessure(id);
+    console.log(this.allMessureArray);
   }
 
+  /**
+   * Evento que actualiza en pantalla el chart 
+   */
   ionViewDidEnter() {
     console.log('ionViewDidEnter');
-    //this.valorObtenido = this.messure.valor;
     this.generarChart();
   }
 
+
   ionViewWillEnter(): void {
     console.log('ionViewWillEnter');
-    //this.valorObtenido = this.messure.valor;
   }
 
+  /**
+   * Dibuja en pantalla el chart
+   */
   generarChart() {
     this.chartOptions={
       chart: {
@@ -173,11 +193,11 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.myChart = Highcharts.chart('highcharts', this.chartOptions );
   }
 
-  // changeDevice(){
-  //   this.device.name="Cambio de nombre";
-  //   this.onChange.emit(this.device);
-  // }
-
+  /**
+   * Evento del boton Open/Close que inserta un log si se abre o cierra la 
+   * valvula e inserta una nueva medicion si se cierra la valvula. Informa 
+   * al usuario a traves de un alert
+   */
   changeState(){
     this.isOpen = !this.isOpen;
     if(this.isOpen){
@@ -190,6 +210,9 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.insertSprayLog();
   }
 
+  /**
+   * Inserta una nueva medicion a la base de datos generando un valor aleatorio en el dispositivo
+   */
   insertNewMessure(){
     console.log("insertElement")
     let myDate = this.myCustomDatePipe.transform(new Date());
@@ -198,31 +221,41 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.messureService.postNewValue(new Messure(0, myDate, value, this.device[0].dispositivoId));
   }
 
+  /**
+   * Inserta un log en la base de datos indicando apertura o cierre de la valvula
+   */
   insertSprayLog(){
     let value = this.isOpen?'1':'0';
     let myDate = this.myCustomDatePipe.transform(new Date());    
     this.sprayService.postNewValue(new Spray(0, value, myDate, this.device[0].electrovalvulaId));
   }
 
+  /**
+   * Grafica todos los logs de la base de datos
+   * @returns devuelve un modal que se grafica en pantalla en forma de lista 
+   */
   async sprayInfo(){
     const modal = await this.modalCtrl.create({
       component: ModalInfoPage,
       componentProps:{
         table: 'spray',
-        data: this.spray
+        data: this.sprayArray
       }
     });
     return await modal.present();
   }
 
   
-
+  /**
+   * Grafica todas las mediciones de la base de datos
+   * @returns devuelve un modal que se grafica en pantalla en forma de lista 
+   */
   async messureInfo(){
     const modal = await this.modalCtrl.create({
       component: ModalInfoPage,
       componentProps:{
         table: 'messure',
-        data: this.allMessure
+        data: this.allMessureArray
       }
     });
     return await modal.present();

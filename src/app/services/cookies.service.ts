@@ -8,16 +8,28 @@ export class CookiesService {
 
   constructor(private cookies: CookieService) { }
 
-
-  //metodo para guardar cosas en el las cookies
+  /**
+   * Metodo para guardar el token en las cookies de tipo clave:valor
+   * @param key 
+   * @param value 
+   */
   setDataFromCookies(key: string, value: string){
     this.cookies.set(key, value);
   }
 
+  /**
+   * Recupera el token de la cookies
+   * @param key 
+   * @returns 
+   */
   getDataFromCookies(key:string){
     return this.cookies.get(key);
   }
 
+  /**
+   * Elimina token de la cookie
+   * @param key 
+   */
   deleteDataFromCookies(key:string){
     this.cookies.delete(key);
   }

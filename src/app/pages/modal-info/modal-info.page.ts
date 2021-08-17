@@ -13,13 +13,16 @@ export class ModalInfoPage implements OnInit {
   // @Input() nombre;
   // @Input() pais;
   array:Array<any>[];
+  table:String="";
 
   constructor(private modalCtrl : ModalController,
     private navParams: NavParams) { }
 
   ngOnInit() {
+    this.table = this.navParams.get('table');
     this.array = this.navParams.get('data');
-    //console.log(this.array[0]);
+    console.log(this.array);
+    console.log(this.table);
   }
 
   outModal(){

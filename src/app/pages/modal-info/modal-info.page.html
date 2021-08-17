@@ -1,22 +1,43 @@
 <ion-header no-border>
   <ion-toolbar color="primary">
-    <ion-title style="text-align:center">Messure Logs</ion-title>
+    <ion-element [ngSwitch]="table">
+      <ion-title style="text-align:center" *ngSwitchCase="'spray'">Spray Logs</ion-title>
+      <ion-title style="text-align:center" *ngSwitchCase="'messure'">Messure Logs</ion-title>
+    </ion-element>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content style="text-align:center">
-  <ion-list style="width:500px; margin:0 auto;">
+  <ion-list>
     <ion-grid class="ion-margin">
-      <ion-row>
-        <ion-col>Valve</ion-col>
-        <ion-col>State</ion-col>
-        <ion-col>Date</ion-col>
-      </ion-row>
-      <ion-row *ngFor="let log of array">
-        <ion-col>{{ log.electrovalvulaId }}</ion-col>
-        <ion-col>{{ log.apertura }}</ion-col>
-        <ion-col>{{ log.fecha }}</ion-col>
-      </ion-row>
+      <ng-container [ngSwitch]="table">
+        <ng-container *ngSwitchCase="'spray'">
+          <ion-row >
+            <ion-col>Valve</ion-col>
+            <ion-col>State</ion-col>
+            <ion-col>Date</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let log of array">
+            <ion-col>{{ log.electrovalvulaId }}</ion-col>
+            <ion-col>{{ log.apertura }}</ion-col>
+            <ion-col>{{ log.fecha }}</ion-col>
+          </ion-row>
+        </ng-container> 
+        <ng-container *ngSwitchCase="'messure'">
+          <ion-row>
+            <ion-col>Device</ion-col>
+            <ion-col>State</ion-col>
+            <ion-col>Date</ion-col>
+          </ion-row>
+          <ion-row *ngFor="let mess of array">
+            <ion-col>{{ mess.dispositivoId }}</ion-col>
+            <ion-col>{{ mess.valor }}</ion-col>
+            <ion-col>{{ mess.fecha }}</ion-col>
+          </ion-row>
+        </ng-container>        
+      </ng-container>
+      
     </ion-grid>
   </ion-list>
   <ion-button color="primary" expand="full" (click)="outModal()">

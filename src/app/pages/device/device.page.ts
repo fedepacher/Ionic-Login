@@ -22,15 +22,14 @@ require('highcharts/modules/solid-gauge')(Highcharts);
 })
 export class DevicePage implements OnInit, ViewWillEnter {
 
-  //@Input() device:any;//variable de entreada que se la manda listado.component
-  //@Output() onChange=new EventEmitter(); //se utiliza para devolver algo al padre
-  private valorObtenido:number=0;
+  private valorObtenido:number=0;//valor del sensor
   public myChart;
   private chartOptions;
-  private device : Device;
-  private messure : Messure;
-  private spray : Spray[];
-  isOpen : boolean;
+  private device : Device;//dispositivo 
+  private messure : Messure;//ultima medicion
+  private spray : Spray[];//arreglo de logs de riego
+  private allMessure : Messure[];//todas las mediciones de un sensor
+  isOpen : boolean;//indica si e la valvula esta abierta o cerrada
 
 
   constructor(private router: ActivatedRoute, 
@@ -62,8 +61,7 @@ export class DevicePage implements OnInit, ViewWillEnter {
     console.log('ID Dispositivo: ' + idDevice); 
     this.getDeviceById(idDevice);
     this.getMessureById(idDevice);
-    
-    //console.log('Nombre Dispositivo: ' + this.device.nombre); 
+    this.getAllMessureById(idDevice);
   }
 
 
@@ -72,6 +70,7 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.device = await this.devService.getDevice(id);
     console.log(this.device);
     this.getSprayById(this.device[0].electrovalvulaId);
+    
   }
 
   async getMessureById(id){
@@ -84,6 +83,12 @@ export class DevicePage implements OnInit, ViewWillEnter {
     console.log('Se ejecuta getSprayById')
     this.spray = await this.sprayService.getAllSpray(id);
     console.log(this.spray);
+  }
+
+  async getAllMessureById(id){
+    console.log('Se ejecuta getAllMessureById');
+    this.allMessure = await this.messureService.getAllMessure(id);
+    console.log(this.allMessure);
   }
 
   ionViewDidEnter() {
@@ -199,13 +204,12 @@ export class DevicePage implements OnInit, ViewWillEnter {
     this.sprayService.postNewValue(new Spray(0, value, myDate, this.device[0].electrovalvulaId));
   }
 
-  async messureInfo(){
+  async sprayInfo(){
     const modal = await this.modalCtrl.create({
       component: ModalInfoPage,
       componentProps:{
+        table: 'spray',
         data: this.spray
-        // nombre: 'Fefi',
-        // pais: 'Argentina'
       }
     });
     return await modal.present();
@@ -213,7 +217,14 @@ export class DevicePage implements OnInit, ViewWillEnter {
 
   
 
-  sprayInfo(){
-
+  async messureInfo(){
+    const modal = await this.modalCtrl.create({
+      component: ModalInfoPage,
+      componentProps:{
+        table: 'messure',
+        data: this.allMessure
+      }
+    });
+    return await modal.present();
   }
 }

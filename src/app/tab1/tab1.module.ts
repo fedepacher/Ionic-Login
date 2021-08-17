@@ -7,6 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { DevicePageModule } from '../pages/device/device.module';
+import { TitleDirective } from '../directives/title.directive';
 
 
 
@@ -19,6 +20,6 @@ import { DevicePageModule } from '../pages/device/device.module';
     Tab1PageRoutingModule,
     DevicePageModule
   ],
-  declarations: [Tab1Page]
+  declarations: [Tab1Page, TitleDirective]
 })
 export class Tab1PageModule {}

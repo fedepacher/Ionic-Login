@@ -1,16 +1,23 @@
 <ion-header no-border>
-  <ion-toolbar>
-    <ion-title>modal-info</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title style="text-align:center">Messure Logs</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content style="text-align:center">
-  <ion-list style="width:300px; margin:0 auto;">
-    <!-- <ion-item *ngFor="let log of logList" routerLink="/device/{{device.dispositivoId}}"> -->
-      <ion-label>
-        <h2>{{nombre}} -- {{pais}}</h2>        
-      </ion-label>
-    <!-- </ion-item> -->
+  <ion-list style="width:500px; margin:0 auto;">
+    <ion-grid class="ion-margin">
+      <ion-row>
+        <ion-col>Valve</ion-col>
+        <ion-col>State</ion-col>
+        <ion-col>Date</ion-col>
+      </ion-row>
+      <ion-row *ngFor="let log of array">
+        <ion-col>{{ log.electrovalvulaId }}</ion-col>
+        <ion-col>{{ log.apertura }}</ion-col>
+        <ion-col>{{ log.fecha }}</ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
   <ion-button color="primary" expand="full" (click)="outModal()">
     EXIT

@@ -202,10 +202,10 @@ export class DevicePage implements OnInit, ViewWillEnter {
   async messureInfo(){
     const modal = await this.modalCtrl.create({
       component: ModalInfoPage,
-      cssClass: 'my-custom-class',
       componentProps:{
-        nombre: 'Fefi',
-        pais: 'Argentina'
+        data: this.spray
+        // nombre: 'Fefi',
+        // pais: 'Argentina'
       }
     });
     return await modal.present();

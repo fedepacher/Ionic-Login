@@ -9,7 +9,7 @@ import { DevicePageRoutingModule } from './device-routing.module';
 import { DevicePage } from './device.page';
 import { ModalInfoPage } from '../modal-info/modal-info.page';
 import { ModalInfoPageModule } from '../modal-info/modal-info.module';
-import { TitleDirective } from 'src/app/directives/title.directive';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 
 @NgModule({
@@ -21,9 +21,10 @@ import { TitleDirective } from 'src/app/directives/title.directive';
     FormsModule,
     IonicModule,
     DevicePageRoutingModule,
-    ModalInfoPageModule
+    ModalInfoPageModule,
+    SharedModule
   ],
-  declarations: [DevicePage, TitleDirective],
+  declarations: [DevicePage],
   exports:[DevicePage]
 })
 export class DevicePageModule {}

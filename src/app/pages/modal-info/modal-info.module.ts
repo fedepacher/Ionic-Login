@@ -4,14 +4,15 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 import { ModalInfoPage } from './modal-info.page';
-import { TitleDirective } from '../../directives/title.directive';
+import { SharedModule } from 'src/app/shared/shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    IonicModule
+    IonicModule,
+    SharedModule
   ],
-  declarations: [ModalInfoPage, TitleDirective]
+  declarations: [ModalInfoPage]
 })
 export class ModalInfoPageModule {}

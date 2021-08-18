@@ -19,17 +19,16 @@ export class Tab1Page {
       this.callDeviceService();
     }
 
-    /**
-     * Metodo que obtiene la lista de dispositivos de la base de datos
-     */
-    async callDeviceService(){
-      console.log("Lamo al service de device")
-      this.devicesList = await this.devService.getDevices();
+  /**
+   * Metodo que obtiene la lista de dispositivos de la base de datos
+   */
+  async callDeviceService(){
+    console.log("Lamo al service de device")
+    this.devicesList = await this.devService.getDevices();
 
-      console.log("Lista que devuelve la promesa");
-      console.log(this.devicesList);
-      //let device = await this.devService.getDevice(list[0]);
-    }
+    console.log("Lista que devuelve la promesa");
+    console.log(this.devicesList);      
+  }
 
   /**
    * Evento del boton logout

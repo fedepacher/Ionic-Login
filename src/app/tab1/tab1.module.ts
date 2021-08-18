@@ -7,7 +7,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { DevicePageModule } from '../pages/device/device.module';
-import { TitleDirective } from '../directives/title.directive';
+import { SharedModule } from '../shared/shared/shared.module';
 
 
 
@@ -18,8 +18,9 @@ import { TitleDirective } from '../directives/title.directive';
     FormsModule,
     ExploreContainerComponentModule,
     Tab1PageRoutingModule,
-    DevicePageModule
+    DevicePageModule,
+    SharedModule
   ],
-  declarations: [Tab1Page, TitleDirective]
+  declarations: [Tab1Page]//, TitleDirective]
 })
 export class Tab1PageModule {}

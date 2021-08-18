@@ -57,13 +57,19 @@ La aplicacion consiste en tomar de una base de datos una lista de sensores y mos
 
 ![architecture](src/assets/images/main_page.png)
 
-Cada dispositivo al ser presionado abre una pantalla con informacion propia a cada sensor. 
+Cada dispositivo al ser presionado abre una pantalla con informacion del valor que posee cada sensor. 
 
 ![architecture](src/assets/images/device_page.png)
 
-En esta pantalla se mustra el valor que posee el sensor, un boton que permite apertura y cierre de una valvula, un boton que muestra toda la informacion de mediciones que lleva registrado el sensor seleccionado y por ultimo un boton que muestra todos los logs de riego que se han ido cargando en la base de datos de cada sensor.
+El boton `Open Valve` permite abrir y cerrar una electrovalvula asociada a cada sensor. Cuando se produce el cierre o apertura de la electrovalvula se informa al usuario con una notificacion tipo `alert` en la pantalla y se inserta un log en la base de datos. Por cada cierre de electrovalvula se inserta en la base de datos una nueva medicion del sensor. 
+
+El boton `Messure Info` provee informacion al usuario de todas las mediciones que posee el sensor almacenadas en la base de datos. Esta informacion es mostrada al usuario en forma de tabla. 
 
 ![architecture](src/assets/images/messure_page.png)
+
+Por ultimo, le boton `Spray Logs` muestra al usuario todos los logs que se han almacenado por cada dispositivo en la base de datos.
+
+![architecture](src/assets/images/spray_page.png)
 
 
 </details>

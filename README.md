@@ -53,9 +53,17 @@ En esta sección vas a encontrar las características más relevantes del proyec
 
 ### Arquitectura de la aplicación
 
-Como ya pudiste ver, la aplicación se ejecuta sobre el ecosistema Docker, y en esta imagen podés ver el diagrama de arquitectura.
+La aplicacion consiste en tomar de una base de datos una lista de sensores y mostrarlo en pantalla con su respectivo nombre y ubicacion.
 
-![architecture](doc/architecture.png)
+![architecture](src/assets/images/main_page.png)
+
+Cada dispositivo al ser presionado abre una pantalla con informacion propia a cada sensor. 
+
+![architecture](src/assets/images/device_page.png)
+
+En esta pantalla se mustra el valor que posee el sensor, un boton que permite apertura y cierre de una valvula, un boton que muestra toda la informacion de mediciones que lleva registrado el sensor seleccionado y por ultimo un boton que muestra todos los logs de riego que se han ido cargando en la base de datos de cada sensor.
+
+![architecture](src/assets/images/messure_page.png)
 
 
 </details>

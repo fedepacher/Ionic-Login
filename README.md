@@ -38,7 +38,7 @@ Se instalaran todos los modulos que se utilizaron para realizar este trabajo.
 Para ejecutar la aplicación tenes que correr el comando `ionic serve` desde la raíz del proyecto para verlo es su version web. De lo contrario podes correr el comando `ionic serve --lab` para poder verlo como un dispositivo movil y web.
 
 En el caso de que no se abra automaticamente el servicio web, lo podes accededer desde [localhost:8100/](http://localhost:8100/).
-En el caso que se este ejecutando como una aplicacion para dispositivos moviles lo podes accededer desde [localhost:8200/](http://localhost:8200/).
+En el caso que se este ejecutando como una aplicación para dispositivos moviles lo podes accededer desde [localhost:8200/](http://localhost:8200/).
 
 
 </details>
@@ -53,17 +53,17 @@ En esta sección vas a encontrar las características más relevantes del proyec
 
 ### Arquitectura de la aplicación
 
-La aplicacion consiste en tomar de una base de datos una lista de sensores y mostrarlo en pantalla con su respectivo nombre y ubicacion.
+La aplicación consiste en tomar de una base de datos una lista de sensores y mostrarlo en pantalla con su respectivo nombre y ubicación.
 
 ![architecture](src/assets/images/main_page.png)
 
-Cada dispositivo al ser presionado abre una pantalla con informacion del valor que posee cada sensor. 
+Cada dispositivo al ser presionado abre una pantalla con información del valor que posee cada sensor. 
 
 ![architecture](src/assets/images/device_page.png)
 
-El boton `Open Valve` permite abrir y cerrar una electrovalvula asociada a cada sensor. Cuando se produce el cierre o apertura de la electrovalvula se informa al usuario con una notificacion tipo `alert` en la pantalla y se inserta un log en la base de datos. Por cada cierre de electrovalvula se inserta en la base de datos una nueva medicion del sensor. 
+El boton `Open Valve` permite abrir y cerrar una electrovalvula asociada a cada sensor. Cuando se produce el cierre o apertura de la electrovalvula se informa al usuario con una notificación tipo `alert` en la pantalla y se inserta un log en la base de datos. Por cada cierre de electrovalvula se inserta en la base de datos una nueva medición del sensor. 
 
-El boton `Messure Info` provee informacion al usuario de todas las mediciones que posee el sensor almacenadas en la base de datos. Esta informacion es mostrada al usuario en forma de tabla. 
+El boton `Messure Info` provee información al usuario de todas las mediciones que posee el sensor almacenadas en la base de datos. Esta información es mostrada al usuario en forma de tabla. 
 
 ![architecture](src/assets/images/messure_page.png)
 
